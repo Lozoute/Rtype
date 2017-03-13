@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API\API_Protocol\Implementation\API_Protocol\API_Protocol.vcxproj">
+      <Project>{52cd15d5-1943-4448-9f4d-ebd30354af4d}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\attack\attack.vcxproj">
+      <Project>{e4dd7989-74da-420d-b8dd-5448e10b360c}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\Bonus\Bonus.vcxproj">
+      <Project>{eac7ea47-3e35-44bf-b384-8492fcbffe98}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\BrownArmor\BrownArmor.vcxproj">
+      <Project>{8268a2d4-1fe3-4c58-a14f-9a7d9381eb41}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\Butterfly\Butterfly.vcxproj">
+      <Project>{1f45d223-eb46-4772-a6aa-7d0335e4ee37}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\Centiped\Centiped.vcxproj">
+      <Project>{945cc54e-6cc7-43f1-b8ef-ec44b22f3712}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\Crab\Crab.vcxproj">
+      <Project>{2c003841-a304-4cd1-8448-c9895b2fed76}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\GreenArmor\GreenArmor.vcxproj">
+      <Project>{f9fade57-0ded-4532-bf73-8ce47f4a4426}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\LittleShip\LittleShip.vcxproj">
+      <Project>{7045dfd9-6b96-4e87-a52d-665ad9a6864b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\MecaCrab\MecaCrab.vcxproj">
+      <Project>{968bac0d-efbe-45ac-86cf-b5324bc2b3b6}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\MecaTurret\MecaTurret.vcxproj">
+      <Project>{5b6dd76c-5358-4189-8769-f99c445d956a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\RedArmor\RedArmor.vcxproj">
+      <Project>{9da11e76-8281-4c57-a310-fab39761a0a2}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\ShipMob\ShipMob.vcxproj">
+      <Project>{02686cd5-52e2-4051-bd45-7b4ecd4bac68}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Mobs\Tentacle\Tentacle.vcxproj">
+      <Project>{06e703fb-4968-4ceb-883b-e4cdf21c8dec}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Ressources\Ressources.vcxproj">
+      <Project>{dcfdbf30-52be-4e72-9f6d-43fb21b5b043}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="GameEngine\GameEngine.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Menu\LogFile.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
+    <ClCompile Include="Menu\MenuJoin.cpp" />
+    <ClCompile Include="Menu\PauseMenu.cpp" />
+    <ClCompile Include="Player\ship.cpp" />
+    <ClCompile Include="Window\Background.cpp" />
+    <ClCompile Include="Window\Graph.cpp" />
+    <ClCompile Include="Window\Hud.cpp" />
+    <ClCompile Include="Window\ProjArray.cpp" />
+    <ClCompile Include="Window\Window.cpp" />
+    <ClCompile Include="Window\WindowEvent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Includes\Background.hpp" />
+    <ClInclude Include="Includes\Explosion.hpp" />
+    <ClInclude Include="Includes\GameEngine.hpp" />
+    <ClInclude Include="Includes\Graph.hpp" />
+    <ClInclude Include="Includes\Hud.hpp" />
+    <ClInclude Include="Includes\LogFile.hpp" />
+    <ClInclude Include="Includes\Menu.hpp" />
+    <ClInclude Include="Includes\MenuJoin.hpp" />
+    <ClInclude Include="Includes\PauseMenu.hpp" />
+    <ClInclude Include="Includes\ProjArray.hpp" />
+    <ClInclude Include="Includes\ship.hpp" />
+    <ClInclude Include="Includes\Window.hpp" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{03423A95-664D-40A5-B595-91ECBAC674FF}</ProjectGuid>
+    <RootNamespace>Client</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)Client/Includes;$(SolutionDir)API/API_Loader;$(SolutionDir)API/API_Protocol;$(SolutionDir)API/API_Socket_Udp;$(SolutionDir)API/API_Mutex;$(SolutionDir)\API\API_Thread;$(SolutionDir)\API\API_Error;$(SolutionDir)Ressources;C:\SFML-2.3\include;$(SolutionDir)Mobs;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SFML-2.3/bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)Client/Includes;$(SolutionDir)API/API_Loader;$(SolutionDir)API/API_Protocol;$(SolutionDir)API/API_Socket_Udp;$(SolutionDir)API/API_Mutex;$(SolutionDir)\API\API_Thread;$(SolutionDir)\API\API_Error;$(SolutionDir)Ressources;C:\SFML-2.3\include;$(SolutionDir)Mobs;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\SFML-2.3/bin;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\Includes;C:\SFML-2.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\SFML-2.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;sfml-network-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Projects\REPO FINAL\Master\MovieNation\Mobs\attack;./Includes;C:\SFML-2.3\include;$(SolutionDir)\API\API_Error;$(SolutionDir)\API\API_Protocol;$(SolutionDir)\API\API_Thread;$(SolutionDir)\API\API_Loader;$(SolutionDir)\API\API_Mutex;D:\Projects\rtype\API\API_Error;D:\Projects\rtype\API\API_Protocol;D:\Projects\rtype\API\API_Thread;D:\Projects\rtype\API\API_Loader;D:\Projects\rtype\API\API_Mutex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;sfml-network.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\SFML-2.3\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <BuildLog>
+      <Path />
+    </BuildLog>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

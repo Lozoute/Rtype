@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Window\Background.cpp" />
+    <ClCompile Include="Window\Graph.cpp" />
+    <ClCompile Include="Window\Hud.cpp" />
+    <ClCompile Include="Window\ProjArray.cpp" />
+    <ClCompile Include="Window\Window.cpp" />
+    <ClCompile Include="Window\WindowEvent.cpp" />
+    <ClCompile Include="GameEngine\GameEngine.cpp" />
+    <ClCompile Include="Menu\Menu.cpp" />
+    <ClCompile Include="Menu\MenuJoin.cpp" />
+    <ClCompile Include="Menu\PauseMenu.cpp" />
+    <ClCompile Include="Player\ship.cpp" />
+    <ClCompile Include="Menu\LogFile.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Includes">
+      <UniqueIdentifier>{10bd33ed-3438-4bf0-9597-85236339ab28}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Includes\Background.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\GameEngine.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\Graph.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\Hud.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\Menu.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\MenuJoin.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\PauseMenu.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\ProjArray.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\ship.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\Window.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\LogFile.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+    <ClInclude Include="Includes\Explosion.hpp">
+      <Filter>Includes</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

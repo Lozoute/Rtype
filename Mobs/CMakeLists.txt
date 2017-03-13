@@ -1,0 +1,199 @@
+cmake_minimum_required(VERSION 3.1)
+
+set( CMAKE_CONFIGURATION_TYPES "Debug;Release" CACHE STRING "" FORCE)
+project(RType CXX)
+
+set(GCC_COMPILE_FLAGS "-Wall -Wextra -Werror -std=c++11")
+
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}"
+	"${CMAKE_CURRENT_SOURCE_DIR}/../Ressources"
+	"${CMAKE_CURRENT_SOURCE_DIR}/../API/API_Protocol"
+	"${CMAKE_CURRENT_SOURCE_DIR}/../API/API_Loader"
+	"${CMAKE_CURRENT_SOURCE_DIR}/../API/API_Error"
+	"${CMAKE_CURRENT_SOURCE_DIR}/BrownArmor"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Butterfly"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Centiped"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Crab"
+	"${CMAKE_CURRENT_SOURCE_DIR}/GreenArmor"
+	"${CMAKE_CURRENT_SOURCE_DIR}/LittleShip"
+	"${CMAKE_CURRENT_SOURCE_DIR}/MecaCrab"
+	"${CMAKE_CURRENT_SOURCE_DIR}/MecaTurret"
+	"${CMAKE_CURRENT_SOURCE_DIR}/RedArmor"
+	"${CMAKE_CURRENT_SOURCE_DIR}/ShipMob"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Tentacle"
+	)
+
+IF(UNIX)
+	set(ATTACK "_API_attack")
+	set(BONUS "_API_Bonus")
+	set(BROWNARMOR "_API_BrownArmor")
+	set(BUTTERFLY "_API_Butterfly")
+	set(CENTIPED "_API_Centiped")
+	set(CRAB "_API_Crab")
+	set(GREENARMOR "_API_GreenArmor")
+	set(LITTLESHIP "_API_LittleShip")
+	set(MECACRAB "_API_MecaCrab")
+	set(MECATURRET "_API_MecaTurret")
+	set(REDARMOR "_API_RedArmor")
+	set(SHIPMOB "_API_ShipMob")
+	set(TENTACLE "_API_Tentacle")
+
+	message("cmake Mobs for UNIX")
+	set(LIBRARY_OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../API/SOs")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COMPILE_FLAGS}")
+ENDIF(UNIX)
+IF(WIN32)
+	set(ATTACK "lib_API_attack")
+	set(BONUS "lib_API_Bonus")
+	set(BROWNARMOR "lib_API_BrownArmor")
+	set(BUTTERFLY "lib_API_Butterfly")
+	set(CENTIPED "lib_API_Centiped")
+	set(CRAB "lib_API_Crab")
+	set(GREENARMOR "lib_API_GreenArmor")
+	set(LITTLESHIP "lib_API_LittleShip")
+	set(MECACRAB "lib_API_MecaCrab")
+	set(MECATURRET "lib_API_MecaTurret")
+	set(REDARMOR "lib_API_RedArmor")
+	set(SHIPMOB "lib_API_ShipMob")
+	set(TENTACLE "lib_API_Tentacle")
+
+	message("cmake Mobs ${CMAKE_CONFIGURATION_TYPES} for WINDOWS")
+	set( LIBRARY_OUTPUT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/../API/DLLs")
+ENDIF(WIN32)
+
+add_library(${ATTACK} SHARED
+
+  attack/attack
+)
+
+add_library(${BONUS} SHARED
+
+  Bonus/Bonus
+)
+
+add_library(${BROWNARMOR} SHARED
+
+  BrownArmor/BrownArmor
+)
+
+add_library(${BUTTERFLY} SHARED
+
+  Butterfly/Butterfly
+)
+
+add_library(${CENTIPED} SHARED
+
+  Centiped/Centiped
+)
+
+add_library(${CRAB} SHARED
+
+  Crab/Crab
+)
+
+add_library(${GREENARMOR} SHARED
+
+  GreenArmor/GreenArmor
+)
+
+add_library(${LITTLESHIP} SHARED
+
+  LittleShip/LittleShip
+)
+
+add_library(${MECACRAB} SHARED
+
+  MecaCrab/MecaCrab
+)
+
+add_library(${MECATURRET} SHARED
+
+  MecaTurret/MecaTurret
+)
+
+add_library(${REDARMOR} SHARED
+
+  RedArmor/RedArmor
+)
+
+add_library(${SHIPMOB} SHARED
+
+  ShipMob/ShipMob
+)
+
+add_library(${TENTACLE} SHARED
+
+  Tentacle/Tentacle
+)
+
+IF(MSVC)
+	set_target_properties( ${ATTACK} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${ATTACK} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${ATTACK} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${BONUS} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${BONUS} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${BONUS} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${BROWNARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${BROWNARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${BROWNARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${BUTTERFLY} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${BUTTERFLY} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${BUTTERFLY} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${CENTIPED} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${CENTIPED} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${CENTIPED} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${CRAB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${CRAB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${CRAB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${GREENARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${GREENARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${GREENARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${LITTLESHIP} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${LITTLESHIP} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${LITTLESHIP} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${MECACRAB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${MECACRAB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${MECACRAB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${MECATURRET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${MECATURRET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${MECATURRET} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${REDARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${REDARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${REDARMOR} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${SHIPMOB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${SHIPMOB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${SHIPMOB} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+
+	set_target_properties( ${TENTACLE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${TENTACLE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_DEBUG ${LIBRARY_OUTPUT_PATH} )
+	set_target_properties( ${TENTACLE} PROPERTIES RUNTIME_OUTPUT_DIRECTORY_RELEASE ${LIBRARY_OUTPUT_PATH} )
+endif(MSVC)
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/..")
+find_package(SFML 2.2 REQUIRED system window graphics network audio)
+
+include_directories(${SFML_INCLUDE_DIR})
+target_link_libraries(${ATTACK} ${SFML_LIBRARIES})
+target_link_libraries(${BONUS} ${SFML_LIBRARIES})
+target_link_libraries(${BROWNARMOR} ${SFML_LIBRARIES})
+target_link_libraries(${BUTTERFLY} ${SFML_LIBRARIES})
+target_link_libraries(${CENTIPED} ${SFML_LIBRARIES})
+target_link_libraries(${CRAB} ${SFML_LIBRARIES})
+target_link_libraries(${GREENARMOR} ${SFML_LIBRARIES})
+target_link_libraries(${LITTLESHIP} ${SFML_LIBRARIES})
+target_link_libraries(${MECACRAB} ${SFML_LIBRARIES})
+target_link_libraries(${MECATURRET} ${SFML_LIBRARIES})
+target_link_libraries(${REDARMOR} ${SFML_LIBRARIES})
+target_link_libraries(${SHIPMOB} ${SFML_LIBRARIES})
+target_link_libraries(${TENTACLE} ${SFML_LIBRARIES})

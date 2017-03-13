@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A4745E47-7AC2-40D1-B488-448EAB5D4E95}</ProjectGuid>
+    <RootNamespace>Server</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)API\API_Loader;$(SolutionDir)API\API_Protocol;$(SolutionDir)API\API_Thread;$(SolutionDir)API\API_Mutex;$(SolutionDir)API\API_Error;$(SolutionDir)Server\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)API\API_Loader;$(SolutionDir)API\API_Protocol;$(SolutionDir)API\API_Thread;$(SolutionDir)API\API_Mutex;$(SolutionDir)API\API_Error;$(SolutionDir)Server\Include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Projects\rtype\API\API_Mutex;D:\Projects\rtype\API\API_Thread;D:\Projects\rtype\API\API_Protocol;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>D:\Projects\MovieNation\API\API_Protocol;D:\Projects\MovieNation\API\API_Thread;D:\Projects\MovieNation\API\API_Loader;D:\Projects\MovieNation\API\API_Mutex;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Bonus\DamageBooster.cpp" />
+    <ClCompile Include="Bonus\FireRateBooster.cpp" />
+    <ClCompile Include="Bonus\HealthPack.cpp" />
+    <ClCompile Include="GameEngine\BonusGenerator.cpp" />
+    <ClCompile Include="GameEngine\Game.cpp" />
+    <ClCompile Include="GameEngine\GameCMDS.cpp" />
+    <ClCompile Include="GameEngine\GameEngine.cpp" />
+    <ClCompile Include="GameEngine\MobGenerator.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Mobs\Centiped.cpp" />
+    <ClCompile Include="Mobs\Crab.cpp" />
+    <ClCompile Include="Mobs\GreenArmor.cpp" />
+    <ClCompile Include="Mobs\LittleShip.cpp" />
+    <ClCompile Include="Mobs\MecaCrab.cpp" />
+    <ClCompile Include="Mobs\RedArmor.cpp" />
+    <ClCompile Include="Mobs\ShipMob.cpp" />
+    <ClCompile Include="Mobs\Tentacle.cpp" />
+    <ClCompile Include="Objects\AObject.cpp" />
+    <ClCompile Include="Objects\Missile.cpp" />
+    <ClCompile Include="Player\Player.cpp" />
+    <ClCompile Include="Player\PlayerShip.cpp" />
+    <ClCompile Include="Server\Server.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\API\API_Protocol\Implementation\API_Protocol\API_Protocol.vcxproj">
+      <Project>{52cd15d5-1943-4448-9f4d-ebd30354af4d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\AObject.hpp" />
+    <ClInclude Include="Include\Centiped.hpp" />
+    <ClInclude Include="Include\Crab.hpp" />
+    <ClInclude Include="Include\Game.hpp" />
+    <ClInclude Include="Include\GameEngine.hpp" />
+    <ClInclude Include="Include\GreenArmor.hpp" />
+    <ClInclude Include="Include\LittleShip.hpp" />
+    <ClInclude Include="Include\MecaCrab.hpp" />
+    <ClInclude Include="Include\Missile.hpp" />
+    <ClInclude Include="Include\MobGenerator.hpp" />
+    <ClInclude Include="Include\Player.hpp" />
+    <ClInclude Include="Include\PlayerShip.hpp" />
+    <ClInclude Include="Include\RedArmor.hpp" />
+    <ClInclude Include="Include\Server.hpp" />
+    <ClInclude Include="Include\ShipMob.hpp" />
+    <ClInclude Include="Include\Tentacle.hpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

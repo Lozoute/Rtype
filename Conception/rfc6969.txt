@@ -1,0 +1,381 @@
+
+
+
+
+
+
+Network Working Group                                      R-Type groupA
+Request for Comments: 6969                                VeriSign, Inc.
+STD: 69                                                      June 2015
+Category: Standards Track
+
+
+       SUPER R TYPE PROTOCOL (SRTP) Transport over UDP
+
+Abstract
+
+   This document describes how a SUPER R TYPE PROTOCOL (SRTP) session
+   is mapped onto a single User Datagram Protocol (UDP) connection.
+
+Status of This Memo
+
+   This document specifies an Internet standards track protocol for the
+   Internet community, and requests discussion and suggestions for
+   improvements.  Please refer to the current edition of the "Internet
+   Official Protocol Standards" (STD 1) for the standardization state
+   and status of this protocol.  Distribution of this memo is unlimited.
+
+Copyright Notice
+
+   Copyright (c) 2015 R-Type group A and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to standard intellectual property rights
+   which will be exstensively described in a later BCP. For now,
+   use BCP 78 as a referee on what you can and cannot do with regard to
+   this document.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+R-Type groupA               Standards Track                     [Page 1]
+
+RFC 6969                   SRTP UDP Transport                  June 2015
+
+
+Table of Contents
+
+   1. Introduction ....................................................2
+      1.1. Conventions Used in This Document ..........................2
+   2. Session Management ..............................................2
+   3. Message Exchange ................................................3
+   4. Data Unit Format ................................................4
+   5. Transport Considerations ........................................5
+     5.1 Ordered Delivery..............................................5
+     5.2 Reliability...................................................5
+     5.3 Flow Control and Congestion Avoidance.........................6
+   6. Internationalization Considerations .............................7
+   7. Security Considerations .........................................7
+
+
+1.  Introduction
+
+   This document describes how the Super R Type Protocol (SRTP) is
+   mapped onto a single client-server UDP connection. UDP is described
+   in [RFC0768].
+
+1.1.  Conventions Used in This Document
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [RFC2119].
+
+2.  Session Management
+
+   Mapping SRTP session management facilities onto the UDP service is
+   straightforward.  A SRTP session first requires creation of a UDP
+   connection between two peers, one that initiates the connection
+   request and one that responds to the connection request.  The
+   initiating peer is called the "client", and the responding peer is
+   called the "server".  A SRTP server MUST listen for UDP connection
+   requests on a standard port assigned by our care.
+
+   The client MUST issue an active OPEN call, specifying the UDP port
+   number on which the server is listening for SRTP connection attempts.
+   The SRTP server MUST return an SRTP <greeting> to the client after
+   the UDP virtual session has been established.
+
+
+
+
+
+
+
+R-Type groupA               Standards Track                     [Page 2]
+
+RFC 6969                   EPP UDP Transport                   June 2015
+
+
+   A SRTP session is normally ended by the client issuing a SRTP
+   <logout> command.  A server receiving a SRTP <logout> command MUST
+   end the SRTP session and close the UDP virtual connection.
+   A client MAY end a SRTP session by issuing a CLOSE call.
+
+   A server MAY limit the life span of an established UDP virtual
+   connection. SRTP sessions that are inactive for more than a 
+   server-defined period MAY be ended by a server issuing a CLOSE call.
+   A server MAY also close UDP virtual connections that have been open
+   and active for longer than a server-defined period.
+
+3.  Message Exchange
+
+   SRTP messages MAY be initiated by the SRTP client or the SRTP server
+   in the form of SRTP commands.  With the exception of the SRTP command
+   logout, The SRTP server MUST respond to every SRTP client message.
+   A SRTP server MUST return a SRTP response to a SRTP command on the
+   same UDP connection that carried the command. If the UDP connection
+   is closed after a server receives and successfully processes a 
+   command but before the response can be returned to the client, the
+   server MAY assume a client logout command to ensure a consistent
+   state between the client and the server.
+
+   A SRTP client streams SRTP commands to a SRTP server on an
+   established UDP connection.  A client MUST NOT distribute commands
+   from a single SRTP session over multiple UDP connections.  A client
+   MAY establish multiple UDP connections to support multiple SRTP
+   sessions with each session mapped to a single connection.  A server
+   SHOULD limit a client to a maximum number of UDP connections based
+   on server capabilities and operational load.
+
+   SRTP describes client-server interaction as a command-response
+   exchange where the client sends one command to the server and the
+   server returns one response to the client.  A client might be able to
+   realize a slight performance gain by pipelining (sending more than
+   one command before a response for the first command is received)
+   commands with UDP transport, but this feature does not change the
+   basic single command, single response operating mode of the core
+   protocol.
+
+   Each SRTP data unit MUST contain a single SRTP message. Commands
+   MUST be processed independently and in the same order as sent from
+   the client.
+
+   SRTP describes server-client interaction as unidirectionnal in the
+   form of server <update> command. These commands SHOULD NOT
+   be responded to. Each SRTP data unit MUST contain a single
+   SRTP message.  Commands MUST be processed independently and in the
+   same order as sent from the server.
+
+
+
+R-Type groupA               Standards Track                     [Page 3]
+
+RFC 6969                  SRTP UDP Transport                   June 2015
+
+
+   General client-server and server-client message exchanges using UDP
+   transport is illustrated in Figure 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+R-Type groupA               Standards Track                     [Page 4]
+
+RFC 6969                  SRTP UDP Transport                   June 2015
+
+
+                       Client                  Server
+                  |                                     |
+                  |                Connect              |
+                  | >>------------------------------->> |
+                  |                                     |
+                  |             Send Greeting           |
+                  | <<-------------------------------<< |
+                  |                                     |
+                  |             Send <login>            |
+                  | >>------------------------------->> |
+                  |                                     |
+                  |             Send Response           |
+                  | <<-------------------------------<< |
+                  |                                     |
+                  |             Send Command            |
+                  | >>------------------------------->> |
+                  |                                     |
+                  |             Send Response           |
+                  | <<-------------------------------<< |
+                  |                                     |
+                  |            Send <update>            |
+                  | <<-------------------------------<< |
+                  |                                     |
+                  |            Send <update>            |
+                  | <<-------------------------------<< |
+                  |                                     |
+                  |             Send Command X          |
+                  | >>------------------------------->> |
+                  |                                     |
+                  |    Send Command Y                   |
+                  | >>---------------+                  |
+                  |                  |                  |
+                  |                  |                  |
+                  |            Send Response X          |
+                  | <<---------------(---------------<< |
+                  |                  |                  |
+                  |                  |                  |
+                  |                  +--------------->> |
+                  |                                     |
+                  |            Send Response Y          |
+                  | <<-------------------------------<< |
+                  |                                     |
+                  |             Send <logout>           |
+                  | >>------------------------------->> |
+                  |                                     |
+                  |     Send Response & Disconnect      |
+                  | <<-------------------------------<< |
+                  |                                     |
+
+               Figure 1: UDP Client-Server / Server-Client
+                                Message Exchange
+
+
+
+
+
+R-Type groupA               Standards Track                     [Page 5]
+
+RFC 6969                  SRTP UDP Transport                   June 2015
+
+
+4.  Data Unit Format
+
+   SRTP Data Unit Format (one tick mark represents one bit position):
+
+       0                   1                   2                   3
+       0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |           Magic              |            Id_packet           |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |     flag      |          Ack                   |    padding   |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+      |                           Ack_Queue                           |
+      +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-//+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+ 
+   Magic (16 bits): first bytes to be striped out of the header and
+   acknowledging an authorized communication.
+   Id_Packet (16 bytes): short int referring to the number of data
+   exchanged during this connection.
+   Ack (16 bits): acknowledgment field for packet reception.
+   Ack_Queue (32 bytes): 32 bytes long acknowledgments queue for
+   packet-data transmission in exchanges between client and server.
+   In Which the first bit acknowledges last packet reception, and so on.
+   flag (8 bit) : indicating if data is to be read, after the header
+   padding (8 bits): filling the header structure with zeroes.
+
+5.  Transport Considerations
+
+   Section 2.1 of the SRTP core protocol specification [RFC6969]
+   describes considerations to be addressed by protocol transport
+   mappings.  This document address the overall wrapper implemented
+   around UDP protocol in order to address some inherent issues:
+
+   -  reliability,
+   -  flow control,
+   -  ordered delivery,
+   -  congestion control.
+
+   These being featured in TCP[RFC0793], you MAY have a look at rfc793,
+   for a more described approach.
+   UDP is not a connection-oriented protocol like TCP, Section 2 of
+   this document describes how SRTP sessions are mapped to UDP
+   connections in order to address this issue.
+   
+5.1 Ordered Delivery
+   UDP's ordered delivery issue is addressed via the packet_id field.
+   The SRTP client, when sending packet to the SRTP server MAY
+   increments his local packet_id number and update the packet header
+   accordingly.
+
+5.2 Reliability
+   The SRTP client when receiving a packet needs to acknowledge reception
+   of said packet. Thus, the SRTP client MAY update the ack field with the
+   Id_packet received. The acknowledgment bitfield consistes of a queue,
+   where the last packet_id received is represented by bit 0 and the 32th
+   bit represents the 32th packet received. Setting the bit to 1
+   acknowledges reception while 0 means packet not received.
+   It is up to the application layer of the client to decide if a missing
+   packet needs to be resend.
+
+
+
+
+R-Type groupA               Standards Track                     [Page 6]
+
+RFC 6969                  SRTP UDP Transport                   June 2015
+
+
+5.3 Flow Control and Congestion avoidance
+   The SRTP introduces the notion of round trip time (RTT) for a packet
+   exchanged between client and server. Flow control rest on this notion.
+   When the time being measured between the time a packet was sent by the
+   client/server and the time this client/server receives acknowledgmenth
+   for this packet is the metric used by the server to regulate network
+   flow. Upon a certain value the server MAY decide to slow down the
+   exchange rate with a client, or increases the flow all together.
+
+   When no data is received from a connection for a long time (where the
+   application decides what "long" means), a server MAY close the
+   connection.  The server MUST attempt to initiate an exchange of
+   close_notify alerts with the client before closing the connection.
+   Servers that are unprepared to receive any more data MAY close the
+   connection after sending the close_notify alert, thus generating an
+   incomplete close on the client side.
+
+6.  Internationalization Considerations
+
+   This document does not introduce or present any internationalization
+   or localization issues.
+
+7.  Security Considerations
+
+   SRTP as-is provides only simple client authentication services using
+   identifiers and plain text passwords.  A passive attack is sufficient
+   to recover client identifiers and passwords, allowing trivial command
+   forgery.  Protection against most other common attacks MUST be
+   provided by other layered protocols and MAY NOT be imputable to our
+   services.
